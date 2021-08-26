@@ -1,4 +1,4 @@
-%%
+%% Instructions to use bgLoadData
 fprintf('\n');
 disp('ENTER 1 for 100% Cotton | ENTER 2 for 94% Cotton');
 disp('ENTER 3 for 100% Nylon  | ENTER 4 for 82% Nylon');
@@ -11,7 +11,7 @@ fprintf('\n');
 disp('For example: To Load 100% Cotton - 2oz - Tear Away')
 disp('Enter the command: cottonTA2 = bgLoadData(myDirectory,1,2,3)')
 fprintf('\n');
-%%
+%% Load selected sensor data
 myDirectory = dir();
 sMaterial = 1;
 sWeight = 1;
@@ -20,7 +20,7 @@ sType = 1;
 dataRaw = bgLoadData(myDirectory,sMaterial,sWeight,sType);
 
 [dataRetime,dataSeconds] = bgRetimeData(dataRaw);
-%%
+%% Instructions to use bgFilterData
 fprintf('\n');
 disp('Assign order of filter to "order"');
 disp('Assign sampling frequency of data to "Fs"');
@@ -40,7 +40,7 @@ disp('For example: To run Butterworth IIR Filter with Bandpass');
 disp('After assigning order, Fs, fL, fH & filter_type');
 disp('Enter the command: [dataFiltered, filter_name] = filter_configuration(dataRetime.Voltage_V,filter_type,order,Fs,fL,fH);');
 fprintf('\n');
-%%
+%% Filter retimed sensor data
 order = 2;
 Fs = 1/mean(diff(dataRetime.Time_sec));
 fL = 0.01;
@@ -48,7 +48,7 @@ fH = 0.2;
 
 filter_type = 1;
 [dataFiltered, filter_name] = bgFilterData(dataRetime.Voltage_V,filter_type,order,Fs,fL,fH);
-%%
+%% Plot raw and filtered data
 figure()
 plot(dataRetime.Time_sec,dataRetime.Voltage_V);
 
